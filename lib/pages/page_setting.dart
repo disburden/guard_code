@@ -87,7 +87,7 @@ class _PageSettingState extends ConsumerState<PageSetting> {
                   ),
                   AppHelp.buildTips(
                     '''
-请牢记此密码,否则你会丢失所有的验证数据\n
+请牢记此密码,否则你会无法复原所有条目的KEY
 密码一旦丢失,将无法恢复
 密码必须是8位字符
                     ''',
