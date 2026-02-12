@@ -27,9 +27,37 @@ web服务器可以是nginx或者其他任意支持静态文件的服务器.具�
 大家可以自己到supabase注册账号,然后创建一个名为"guard_code"的项目,这个项目名称应该也就是数据库的名称.
 进入项目后,在左边导航到"SQL Editor"视图,这里可以执行sql语句.
 运行以下sql语句进行数据库初始化:
-表:
+__表:guard_code__
+```sql
+create table public.guard_code (
+  id serial not null,
+  tag_id integer null default 0,
+  project text not null,
+  account text not null,
+  memo text null,
+  logo_url text null,
+  guard text not null,
+  state integer not null default 1,
+  created_at timestamp without time zone null default CURRENT_TIMESTAMP,
+  updated_at timestamp without time zone null default CURRENT_TIMESTAMP,
+  constraint guard_code_pkey primary key (id)
+) TABLESPACE pg_default;
+```
+__表:tag__
+```sql
+create table public.tag (
+  id serial not null,
+  name text not null,
+  color text null default '#95a5a6'::text,
+  sort_order integer null default 0,
+  created_at timestamp without time zone null default CURRENT_TIMESTAMP,
+  constraint tag_pkey primary key (id),
+  constraint tag_name_key unique (name),
+  constraint tag_name_unique unique (name)
+) TABLESPACE pg_default;
+```
 
-函数:delete_tag 用来删除tag
+__函数:delete_tag 用来删除tag__
 ```sql
 create or replace function delete_tag(p_tag_id integer)
 returns void
@@ -75,4 +103,4 @@ supabase的连接url和密钥都可以在supabase网站中获取.
 
 配置完成后,点击"保存"按钮,此时会提示是否本地存储配置信息.
 公共环境强烈建议不要存储.
-保存完成后返回主界面.
+保存完成后返回主界面.此时就可以点击顶部的"添加"按钮,添加你的验证器了.
