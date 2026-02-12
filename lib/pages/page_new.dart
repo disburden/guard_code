@@ -7,6 +7,7 @@ import "package:guard_code/preload.dart";
 import "package:guard_code/public/define.dart";
 import "package:guard_code/public/style/style.dart";
 import 'package:supabase_flutter/supabase_flutter.dart';
+import "package:wgq_dart/wgq_dart.dart";
 
 // ignore: must_be_immutable
 class PageNew extends ConsumerStatefulWidget {
@@ -41,17 +42,20 @@ class _PageNewState extends ConsumerState<PageNew> {
   void initState() {
     super.initState();
     _isEdit = widget.guardCode != null;
-    if (_isEdit) {
-      _projectController.text = widget.guardCode!.project;
-      _accountController.text = widget.guardCode!.account;
-      _guardController.text = widget.guardCode!.guard;
-      _memoController.text = widget.guardCode!.memo ?? '';
-      _logoUrlController.text = widget.guardCode!.logoUrl ?? '';
-      _selectedTag = widget.tags.firstWhere(
-        (tag) => tag.id == widget.guardCode!.tagId,
-      );
-    } else {
-      _selectedTag = widget.tags.last;
+    debugPrint('tags0000000: ${widget.tags.length}');
+    if (WDDataType.isAir(widget.tags) == false) {
+      if (_isEdit) {
+        _projectController.text = widget.guardCode!.project;
+        _accountController.text = widget.guardCode!.account;
+        _guardController.text = widget.guardCode!.guard;
+        _memoController.text = widget.guardCode!.memo ?? '';
+        _logoUrlController.text = widget.guardCode!.logoUrl ?? '';
+        _selectedTag = widget.tags.firstWhere(
+          (tag) => tag.id == widget.guardCode!.tagId,
+        );
+      } else {
+        _selectedTag = widget.tags.last;
+      }
     }
     final config = ref.read(configProvider).requireValue;
     guardCodeService = GuardCodeService(supabase, config.zhongyao);
@@ -82,6 +86,13 @@ class _PageNewState extends ConsumerState<PageNew> {
   }
 
   Widget _buildMainBody() {
+    if (WDDataType.isAir(widget.tags)) {
+      debugPrint('tags是空的');
+      return WFWidgetUtils.noDataWidget(
+        hintString: "请先到\"基础设置\"中完善基础信息",
+        icon: Icons.settings,
+      );
+    }
     return LayoutBuilder(
       builder: (context, constraints) {
         double containerWidth = constraints.maxWidth < 500
@@ -143,6 +154,7 @@ class _PageNewState extends ConsumerState<PageNew> {
                     isPassword: false,
                     controller: _logoUrlController,
                   ),
+                  AppHelp.buildTips("支持svg格式图片"),
                   const SizedBox(height: 24),
 
                   // 选择标签
@@ -222,7 +234,7 @@ class _PageNewState extends ConsumerState<PageNew> {
     );
   }
 
-  _doCleanInputerText() {
+  void _doCleanInputerText() {
     _projectController.text = '';
     _accountController.text = '';
     _guardController.text = '';
@@ -278,11 +290,11 @@ class _PageNewState extends ConsumerState<PageNew> {
   }
 
   void _doUpdateGuardCode() async {
-    final para_id = widget.guardCode!.id;
-    final para_tagId = _selectedTag?.id;
-    final para_project = _projectController.text;
-    final para_account = _accountController.text;
-    final para_logoUrl = _logoUrlController.text.isNotEmpty
+    final paraId = widget.guardCode!.id;
+    final paraTagId = _selectedTag?.id;
+    final paraProject = _projectController.text;
+    final paraAccount = _accountController.text;
+    final paraLogoUrl = _logoUrlController.text.isNotEmpty
         ? _logoUrlController.text
         : null;
 
@@ -291,11 +303,11 @@ class _PageNewState extends ConsumerState<PageNew> {
 
     try {
       await guardCodeService.updateGuardCode(
-        para_id!,
-        tagId: para_tagId,
-        project: para_project,
-        account: para_account,
-        logoUrl: para_logoUrl,
+        paraId!,
+        tagId: paraTagId,
+        project: paraProject,
+        account: paraAccount,
+        logoUrl: paraLogoUrl,
       );
       if (widget.delegate != null) {
         widget.delegate!.needRefresh();

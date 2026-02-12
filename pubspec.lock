@@ -1282,8 +1282,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: master
-      resolved-ref: "3b07fbb992b212d0a8d4802fb05f39c8586931ae"
+      ref: db5e5e3bc0c1a991aa4dc8a3919bee5c7c8bb3ff
+      resolved-ref: db5e5e3bc0c1a991aa4dc8a3919bee5c7c8bb3ff
       url: "https://gitee.com/disburden/wgq_flutter.git"
     source: git
     version: "0.0.1"

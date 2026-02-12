@@ -46,7 +46,7 @@ dependencies:
   wgq_flutter:
     git:
       url: https://gitee.com/disburden/wgq_flutter.git
-      ref: master
+      ref: db5e5e3bc0c1a991aa4dc8a3919bee5c7c8bb3ff
 
   #显示菊花
   modal_progress_hud_nsn: ^0.5.1

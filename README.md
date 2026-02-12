@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://images.najie.eu.org/img/guardcode/guardcode256_bw.png" width="300" />
+  <img src="https://img.jzxm.eu.org/guardcode/guardcode512_bw.png" width="300" />
 </p>
 
 # 护卫码
@@ -9,6 +9,7 @@
 基于Flutter+supabase在线数据库开发的,跨平台,可根据tag进行分组的二次验证器.
 如果用户有自己的服务器,建议以web方式部署,方便多平台调用.
 核心功能采用[otp](https://pub-web.flutter-io.cn/packages/otp)组件实现
+![](https://img.jzxm.eu.org/guardcode/display.png)
 
 ## 安全性
 - 采用[supabase](https://supabase.com)免费在线数据库,每个用户需要自己独立申请supabase账号,保证数据安全.
@@ -55,6 +56,10 @@ create table public.tag (
   constraint tag_name_key unique (name),
   constraint tag_name_unique unique (name)
 ) TABLESPACE pg_default;
+```
+__表:初始化一条记录__
+```sql
+insert into tag (id,name) values (0,'无');
 ```
 
 __函数:delete_tag 用来删除tag__

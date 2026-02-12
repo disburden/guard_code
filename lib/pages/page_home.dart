@@ -53,8 +53,8 @@ class _PageHomeState extends ConsumerState<PageHome>
     final config = ref.read(configProvider).requireValue;
     final supabase = ref.read(supabaseClientProvider);
     guardCodeService = GuardCodeService(supabase, config.zhongyao);
-    _future = _doLoadData();
     _doGainTags();
+    _future = _doLoadData();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -286,7 +286,6 @@ class _PageHomeState extends ConsumerState<PageHome>
 
   Future<bool> _doGainTags() async {
     debugPrint('开始获取tag列表');
-
     try {
       final supabase = ref.read(supabaseClientProvider);
       final response = await supabase
@@ -298,7 +297,7 @@ class _PageHomeState extends ConsumerState<PageHome>
           .map((row) => Tag.fromRow(row as Map<String, dynamic>))
           .toList();
       _selectedTag = _displayTags.first;
-
+      debugPrint('tags1111: $_tagList');
       setState(() {});
       return true;
     } catch (e) {

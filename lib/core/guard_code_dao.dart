@@ -93,7 +93,8 @@ class GuardCodeRepository {
           .select()
           .single();
 
-      return GuardCode.fromRow(response as Map<String, dynamic>, key);
+      return GuardCode.fromRow(response, key);
+      // return GuardCode.fromRow(response as Map<String, dynamic>, key);
     } catch (e) {
       throw Exception(
         'Failed to update guard code fields (tag_id, project, account, logo_url): $e',
