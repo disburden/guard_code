@@ -63,7 +63,7 @@ class GuardCodeRepository {
           .select()
           .single();
 
-      return GuardCode.fromRow(response as Map<String, dynamic>, key);
+      return GuardCode.fromRow(response, key);
     } catch (e) {
       throw Exception('Failed to update guard code: $e');
     }
