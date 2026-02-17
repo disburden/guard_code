@@ -286,12 +286,19 @@ class AppHelp {
 
     final pacificTimeZone = timezone.getLocation('America/Los_Angeles');
     final date = timezone.TZDateTime.from(now, pacificTimeZone);
-    final code = OTP.generateTOTPCodeString(
-      guard,
-      date.millisecondsSinceEpoch,
-      algorithm: Algorithm.SHA1,
-      isGoogle: true,
-    );
+    String code = "解码错误";
+    try {
+      code = OTP.generateTOTPCodeString(
+        guard,
+        date.millisecondsSinceEpoch,
+        algorithm: Algorithm.SHA1,
+        isGoogle: true,
+      );
+    } catch (e) {
+      debugPrint('Error: $e');
+      // DealErrorUtil.dealAppError(e);
+    }
+
     return code;
   }
 

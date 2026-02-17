@@ -70,6 +70,7 @@ class GuardCode {
     String? alias,
     String? logoUrl,
     String? guard,
+    String? memo,
     int? state,
     DateTime? createdAt,
     DateTime? updatedAt,

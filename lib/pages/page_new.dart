@@ -247,7 +247,7 @@ class _PageNewState extends ConsumerState<PageNew> {
     final trimGuard = _guardController.text.replaceAll(RegExp(r'\s+'), '');
     final config = ref.read(configProvider).requireValue;
     final finalGuard = AppHelp.jiami(trimGuard, config.zhongyao);
-
+    debugPrint('save data finalGuard: $finalGuard');
     _isAsyncing = true;
     setState(() {});
     try {
@@ -282,6 +282,7 @@ class _PageNewState extends ConsumerState<PageNew> {
         );
       }
     } catch (e) {
+      debugPrint('failed e: $e');
       DealErrorUtil.dealAppError(e);
     } finally {
       _isAsyncing = false;

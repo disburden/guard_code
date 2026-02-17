@@ -11,6 +11,8 @@
 核心功能采用[otp](https://pub-web.flutter-io.cn/packages/otp)组件实现
 ![](https://img.jzxm.eu.org/guardcode/display.png)
 
+tips:左滑记录可以进行"编辑"和"删除".
+
 ## 安全性
 - 采用[supabase](https://supabase.com)免费在线数据库,每个用户需要自己独立申请supabase账号,保证数据安全.
 - 项目使用CS架构,客户端直连数据库,没有api服务器,数据安全.
