@@ -7,7 +7,7 @@
 
 本项目适用于有一些计算机基础知识的用户.
 基于Flutter+supabase在线数据库开发的,跨平台,可根据tag进行分组的二次验证器.
-如果用户有自己的服务器,建议以web方式部署,方便多平台调用.
+如果用户有自己的服务器和域名,建议以web方式部署,方便多平台调用.
 核心功能采用[otp](https://pub-web.flutter-io.cn/packages/otp)组件实现
 ![](https://img.jzxm.eu.org/guardcode/display.png)
 
@@ -16,7 +16,7 @@ tips:左滑记录可以进行"编辑"和"删除".
 ## 安全性
 - 采用[supabase](https://supabase.com)免费在线数据库,每个用户需要自己独立申请supabase账号,保证数据安全.
 - 项目使用CS架构,客户端直连数据库,没有api服务器,数据安全.
-- 每个验证器条目的key采用DES加密后保存在数据库中,用户自己设定DES加密密码,即使用户数据库泄露,只要密码不泄露,数据就安全.
+- 每条记录的key都采用DES加密后保存在数据库中,用户自己设定DES加密密码,即使用户数据库泄露,只要密码不泄露,数据就安全.
 
 
 ## 部署方式
@@ -30,7 +30,7 @@ web服务器可以是nginx或者其他任意支持静态文件的服务器.具�
 
 ### 数据库
 大家可以自己到supabase注册账号,然后创建一个名为"guard_code"的项目,这个项目名称应该也就是数据库的名称.
-进入项目后,在左边导航到"SQL Editor"视图,这里可以执行sql语句.
+进入项目后,在左边菜单导航到"SQL Editor"视图,这里可以执行sql语句.
 运行以下sql语句进行数据库初始化:
 __表:guard_code__
 ```sql
@@ -61,7 +61,7 @@ create table public.tag (
   constraint tag_name_unique unique (name)
 ) TABLESPACE pg_default;
 ```
-__表:初始化一条记录__
+__表:初始化一条tag记录__
 ```sql
 insert into tag (id,name) values (0,'无');
 ```
@@ -95,7 +95,7 @@ $$;
 首次运行可能会有错误提示弹出,主要是因为没有配置信息,可以不用理会
 ![](https://img.jzxm.eu.org/guardcode/first_err.png)
 
-点击右上角齿轮按钮,弹出的菜单中选择"基本设置",进入配置页面
+直接点击右上角齿轮按钮,弹出的菜单中选择"基本设置",进入配置页面
 ![](https://img.jzxm.eu.org/guardcode/base_setting.png)
 
 主要就是3个配置:
