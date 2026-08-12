@@ -105,7 +105,7 @@ $$;
 
 supabase的连接url和密钥都可以在supabase网站中获取.
 打开supabase网站,进入你的项目,然后点击顶部的"connect"按钮.
-![](https://img.jzxm.eu.org/guardcode/supabase_connect.png)
+![](https://img.jzxm.eu.org/guardcode/supabase_connect.png)  
 之后会在左边弹出相关信息:      
 ![](https://img.jzxm.eu.org/guardcode/supabase_connect2.png)
 按照图中示例顺序点击,就可以看到url和anonKey这两个连接信息.
