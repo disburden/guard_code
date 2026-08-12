@@ -106,9 +106,9 @@ $$;
 supabase的连接url和密钥都可以在supabase网站中获取.
 打开supabase网站,进入你的项目,然后点击顶部的"connect"按钮.
 ![](https://img.jzxm.eu.org/guardcode/supabase_connect.png)
-之后会显示相关连接信息:
-![](https://img.jzxm.eu.org/guardcode/db_connect_info.png)
-注意,这里有两个密钥,publishable key应该是推荐在服务器端使用,而我们是客户端直连,所以建议使用anon key.
+之后会在左边弹出相关信息:
+按照图中示例顺序点击,就可以看到url和anonKey这两个连接信息
+![](https://img.jzxm.eu.org/guardcode/supabase_connect2.png)
 
 配置完成后,点击"保存"按钮,此时会提示是否本地存储配置信息.
 公共环境强烈建议不要存储.
